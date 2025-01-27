@@ -6,9 +6,8 @@ import { useArticles } from './states/articles';
 // This App is a search engine for research bibliometric studies in the field of Artificial Intelligence. In this app, there are two main features: a search engine and a map with universities, authors, and articles. The search engine allows users to search for articles by title, author, or university. The map shows the location of universities, authors, and articles.
 
 const fetchArticles = async (search: string) => {
-  const NEXT_API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
   try {
-    const res = await fetch(`${NEXT_API}/articles?search=${search}`);
+    const res = await fetch(`/api/articles?search=${search}`);
     if (!res.ok) {
       throw new Error('Falha ao buscar artigos');
     }
