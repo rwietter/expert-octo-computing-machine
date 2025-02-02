@@ -15,8 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-export const Matadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Estudo Bibliométrico em IA',
   description: 'Este App é um mecanismo de busca para estudos bibliométricos na área de Inteligência Artificial. Neste app, existem duas funcionalidades principais: um mecanismo de busca e um mapa com universidades, autores e artigos. O mecanismo de busca permite que os usuários pesquisem artigos por título, autor ou universidade. O mapa mostra a localização de universidades, autores e artigos.',
   category: 'Bibliometria',
