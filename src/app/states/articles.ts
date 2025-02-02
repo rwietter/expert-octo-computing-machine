@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface Article {
+export interface Article {
   article_title: string
   author_names: string
   author_universities: string
@@ -9,6 +9,11 @@ interface Article {
   abstract: string
   publication_date: string
   pages: number
+  cited_reference_count: number
+  times_cited: number
+  total_times_cited: number
+  usage_count_180: number
+  usage_count_since_2013: number
 }
 
 type ArticlesState = {

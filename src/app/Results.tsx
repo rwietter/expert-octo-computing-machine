@@ -1,12 +1,15 @@
 'use client'
 
 import React from 'react'
+import { PiDotFill } from 'react-icons/pi'
+import Accordion from './Accordion'
 import { useArticles } from './states/articles'
-import { PiArrowSquareInDuotone, PiDotFill } from 'react-icons/pi'
 
 const doi = (doi: any) => `https://doi.org/${doi}`
 
 const Results = () => {
+  const [openStates, setOpenStates] = React.useState<boolean[]>([]);
+
   const articleStore = useArticles()
   const [currentPage, setCurrentPage] = React.useState(1)
   const [articlesPerPage] = React.useState(10)
@@ -15,6 +18,21 @@ const Results = () => {
   const indexOfLastArticle = currentPage * articlesPerPage
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage
   const currentArticles = articleStore.articles?.slice(indexOfFirstArticle, indexOfLastArticle)
+
+  // Inicializa o estado de abertura/fechamento para cada artigo
+  React.useEffect(() => {
+    if (articleStore.articles) {
+      setOpenStates(new Array(articleStore.articles.length).fill(false));
+    }
+  }, [articleStore.articles]);
+
+  const toggleAccordion = (index: number) => {
+    setOpenStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
@@ -34,11 +52,11 @@ const Results = () => {
       {articleStore.articles.length > 0 && (
         <h2 className='text-3xl text-gray-200 font-bold text-center py-4'>Artigos encontrados</h2>
       )}
-      <ul className='space-y-5 py-4 max-w-2xl'>
+      <ul className='space-y-5 py-4 max-w-2xl w-full p-2'>
         {currentArticles?.map((article, index) => (
           <li
             key={`${article.author_universities}:${index}`}
-            className="text-gray-300 hover:text-white transition-colors duration-300 bg-[#272727] hover:bg-indigo-600 p-3 rounded-md"
+            className="text-gray-300 hover:text-white transition-colors duration-300 bg-[#272727] hover:bg-indigo-700 p-3 rounded-md"
           >
             <a
               target="_blank"
@@ -64,9 +82,13 @@ const Results = () => {
                   {article?.pages} páginas
                 </p>
               </div>
-              <a href={doi(article?.doi)} target="_blank" rel="noopener noreferrer" className='text-indigo-500 hover:text-indigo-600 transition-colors duration-300'>
-                <PiArrowSquareInDuotone size={20} className='text-white' />
-              </a>
+            </div>
+            <div className="group-hover:bg-indigo-800 transition-colors duration-300">
+              <Accordion
+                isOpen={openStates[index]}
+                article={article}
+                toggleAccordion={() => toggleAccordion(index)}
+              />
             </div>
           </li>
         ))}
