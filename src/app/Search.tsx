@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React from 'react';
 import { useArticles } from './states/articles';
 
 // This App is a search engine for research bibliometric studies in the field of Artificial Intelligence. In this app, there are two main features: a search engine and a map with universities, authors, and articles. The search engine allows users to search for articles by title, author, or university. The map shows the location of universities, authors, and articles.
@@ -9,7 +9,8 @@ const fetchArticles = async (search: string) => {
   try {
     const res = await fetch(`/api/articles?search=${search}`);
     if (!res.ok) {
-      throw new Error('Falha ao buscar artigos');
+      console.error('Erro ao buscar artigos:', res);
+      return [];
     }
     return res.json();
   } catch (error) {
