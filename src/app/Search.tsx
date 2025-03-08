@@ -49,7 +49,7 @@ const Search = () => {
     <section className='w-full flex justify-center max-w-5xl mx-auto p-4 text-gray-200'>
       <form onSubmit={handleSubmit} className='pt-10 flex flex-col w-full max-w-xl'>
         <fieldset>
-          <legend className='text-2xl text-center'>Buscar artigos</legend>
+          <legend className='text-2xl text-center'>Buscar por 1802 artigos metrificados</legend>
           <input type="text" placeholder="Título, autor ou universidade" className='bg-[#272727] py-2 px-4 rounded-md mt-3 w-full' name="search" id="search" />
         </fieldset>
         <button
