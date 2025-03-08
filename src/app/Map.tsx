@@ -2,7 +2,7 @@
 
 import { Icon, IconOptions } from 'leaflet';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { universities } from './data';
 
 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
@@ -13,6 +13,7 @@ const ZoomControl = dynamic(() => import('react-leaflet').then((mod) => mod.Zoom
 
 const UniversityMap = () => {
   const [defaultIcon, setDefaultIcon] = useState<Icon<IconOptions>>({} as Icon<IconOptions>);
+
   useEffect(() => {
     const f = async () => {
       if (typeof window === 'undefined') return;
@@ -51,8 +52,10 @@ const UniversityMap = () => {
           <Marker key={index} position={[uni.latitude, uni.longitude]} {...(defaultIcon ? { icon: defaultIcon } : {})} title='Universidade' draggable={false}>
             <Popup>
               <div>
-                <h3>{uni.university}</h3>
-                <p><strong>Artigos: {uni.articles}</strong></p>
+                <a href={uni.link} target='_blank' rel='noreferrer' className='text-lg font-bold text-blue-500'>
+                  {uni.university}
+                </a>
+                <p className='text-lg'><strong>Artigos: {uni.articles}</strong></p>
               </div>
             </Popup>
           </Marker>
