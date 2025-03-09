@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased bg-[#0E0E0E]`}
+        className='antialiased bg-zinc-900'
       >
         {children}
       </body>

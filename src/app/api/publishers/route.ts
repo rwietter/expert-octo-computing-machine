@@ -8,7 +8,7 @@ export async function GET(request: Request): Promise<Response> {
       JOIN publications ON articles.publication_id = publications.id
       GROUP BY publications.name
       ORDER BY articles DESC
-      LIMIT 5;
+      LIMIT 10;
     `;
 
     const stmt = db.prepare(query);

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useArticles } from './states/articles';
 
 // This App is a search engine for research bibliometric studies in the field of Artificial Intelligence. In this app, there are two main features: a search engine and a map with universities, authors, and articles. The search engine allows users to search for articles by title, author, or university. The map shows the location of universities, authors, and articles.
@@ -19,9 +19,16 @@ const fetchArticles = async (search: string) => {
   }
 }
 
+
+
 const Search = () => {
   const [loading, setLoading] = React.useState(false);
   const articleState = useArticles();
+
+  useEffect(() => {
+    const input = document.getElementById('search') as HTMLInputElement;
+    input.focus();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -52,18 +59,23 @@ const Search = () => {
           <legend className='text-2xl text-center'>Buscar artigos metrificados em AI</legend>
           <input type="text" placeholder="Título, autor ou universidade" className='bg-[#272727] py-2 px-4 rounded-md mt-3 w-full' name="search" id="search" />
         </fieldset>
-        <button
-          type="submit"
-          className='bg-indigo-500 py-2 px-4 w-full text-gray-200 hover:bg-indigo-600 transition-colors duration-400 mt-4 rounded-md flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed'
-          disabled={loading}
-        >
-          <div className='flex items-center'>
-            {loading && (
-              <div className='w-4 h-4 rounded-full border-3 border-t-4 border-gray-200 border-opacity-70 animate-spin mx-auto' />
-            )}
-            <span className='pl-2'>Buscar</span>
-          </div>
-        </button>
+        <section className='flex space-x-4'>
+          <button
+            type="submit"
+            className='bg-indigo-500 py-2 px-4 w-full text-gray-200 hover:bg-indigo-600 transition-colors duration-400 mt-4 rounded-md flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed'
+            disabled={loading}
+          >
+            <div className='flex items-center'>
+              {loading && (
+                <div className='w-4 h-4 rounded-full border-3 border-t-4 border-gray-200 border-opacity-70 animate-spin mx-auto' />
+              )}
+              <span className='pl-2'>Buscar</span>
+            </div>
+          </button>
+          <button aria-label='Limpar' type='reset' className='bg-red-500 py-2 px-4 w-full text-gray-200 hover:bg-red-500 transition-colors duration-400 mt-4 rounded-md flex items-center justify-center cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed' onClick={() => articleState.setArticles(null)} disabled={loading}>
+            Limpar
+          </button>
+        </section>
       </form>
     </section>
   )

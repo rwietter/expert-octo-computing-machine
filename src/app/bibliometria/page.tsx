@@ -1,15 +1,22 @@
 // app/page.js
+'use client'
+import dynamic from 'next/dynamic';
 import Header from '../Header';
-import UniversityMap from '../Map';
 import Publishers from '../publishers';
 import Results from '../Results';
 import Search from '../Search';
 
+// Dynamically import the Map component with SSR disabled
+const UniversityMap = dynamic(() => import('../Map'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[80vh] bg-[#121212] flex items-center justify-center">
+      <div className="text-white text-lg">Carregando mapa...</div>
+    </div>
+  ),
+});
 
-// This App is a search engine for research bibliometric studies in the field of Artificial Intelligence. In this app, there are two main features: a search engine and a map with universities, authors, and articles. The search engine allows users to search for articles by title, author, or university. The map shows the location of universities, authors, and articles.
-
-export default async function Home() {
-
+export default function Home() {
   return (
     <main className='w-full min-h-dvh'>
       {/* Header */}
@@ -22,13 +29,9 @@ export default async function Home() {
       <Results />
 
       {/* Earth map with universities/autors/articles */}
-
       <UniversityMap />
 
-      <div className='grid grid-cols-2 gap-4 h-[400px]'>
-        <Publishers />
-        <Publishers />
-      </div>
+      <Publishers />
     </main>
   );
 }
