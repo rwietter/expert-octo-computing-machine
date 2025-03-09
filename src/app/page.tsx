@@ -7,9 +7,9 @@ export default function Page() {
       <div className="gradient-background"></div>
       <div className="blur-overlay"></div>
       <Header />
-      <section className="max-w-7xl mx-auto relative top-1/4 transform -translate-y-1/2">
+      <section className="max-w-8xl mx-auto relative top-1/4 transform -translate-y-1/2">
         <h1 className="font-black text-center text-white p-4 leading-snug text-6xl sm:text-7xl md:text-7xl lg:text-8xl xl:text-[7.5rem]">
-          Descubra publicações científicas sobre AI.
+          Insights bibliométricos aplicados à AI.
         </h1>
       </section>
       <section className="absolute bottom-0 left-0 right-0 text-zinc-900 bg-opacity-20 rounded-t-3xl p-4 bg-white/30 backdrop-blur-sm max-w-4xl mx-auto grid grid-cols-1 gap-4">

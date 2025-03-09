@@ -1,7 +1,6 @@
 'use client';
 
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { universities } from './data';
