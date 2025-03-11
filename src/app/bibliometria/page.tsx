@@ -1,6 +1,7 @@
 // app/page.js
 'use client'
 import dynamic from 'next/dynamic';
+import Categories from '../categories';
 import Header from '../Header';
 import Publishers from '../publishers';
 import Results from '../Results';
@@ -32,6 +33,8 @@ export default function Home() {
       <UniversityMap />
 
       <Publishers />
+
+      <Categories />
     </main>
   );
 }

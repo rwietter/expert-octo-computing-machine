@@ -22,7 +22,7 @@ const Publishers = () => {
         // Sort publishers by number of articles in descending order
         const sortedData = data.sort((a: Publisher, b: Publisher) => b.articles - a.articles).map((item: Publisher) => {
           return {
-            publisher: item.publisher[0] + item.publisher.slice(1).toLowerCase(),
+            publisher: item.publisher,
             articles: item.articles
           };
         });
@@ -62,6 +62,7 @@ const Publishers = () => {
   }
 
   const CustomTooltip = ({ active, payload, label }: any) => {
+
     if (active && payload && payload.length) {
       return (
         <div className="bg-[#1a1a1a] p-4 rounded-lg border border-[#333] shadow-xl">
@@ -78,7 +79,7 @@ const Publishers = () => {
   return (
     <div className="bg-[#121212] p-6 mt-4 rounded-2xl shadow-2xl w-full mx-auto">
       <h2 className="text-2xl text-white font-semibold text-center mb-6">
-        Top Publicações por Publisher
+        Top Publicações por Jornal/Editora
       </h2>
       <ResponsiveContainer width="100%" height={650}>
         <BarChart

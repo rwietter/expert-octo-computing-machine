@@ -31,7 +31,7 @@ const UniversityMap = () => {
 
   return (
     <section className='w-full h-full mt-6'>
-      <h2 className='text-3xl text-gray-200 font-bold text-center py-4'>Universidades com artigos</h2>
+      <h2 className='text-3xl text-gray-200 font-bold text-center py-4'>Universidades com artigos selecionados</h2>
       <MapContainer
         center={[0, 0]}
         touchZoom={false}

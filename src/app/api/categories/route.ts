@@ -3,12 +3,18 @@ import db from "@/db/db";
 export async function GET(request: Request): Promise<Response> {
   try {
     const query = `
-      SELECT publications.publisher AS publisher, COUNT(articles.id) AS articles
-      FROM articles
-      JOIN publications ON articles.publication_id = publications.id
-      GROUP BY publications.publisher
-      ORDER BY articles DESC
-      LIMIT 10;
+      SELECT
+        categories.category as category,
+        COUNT(articles.id) as articles
+      FROM
+        categories
+        JOIN articles ON categories.article_id = articles.id
+      GROUP BY
+        categories.category
+      ORDER BY
+        articles DESC
+      LIMIT
+        10;
     `;
 
     const stmt = db.prepare(query);
@@ -18,9 +24,9 @@ export async function GET(request: Request): Promise<Response> {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error: any) {
-    console.error('Erro ao fazer query de publishers:', error);
+    console.error('Erro ao fazer query de categories:', error);
     return new Response(JSON.stringify({
-      error: 'Erro ao fazer query de publishers',
+      error: 'Erro ao fazer query de categories',
       details: error?.message || 'Unknown error'
     }), {
       status: 500,
